@@ -20,13 +20,13 @@
   --surface2: #1a1a28;
   --line: #1e1e2e;
   --line2: #2a2a3e;
-  --purple: #a855f7;
-  --purple-dim: #7c3aed;
-  --purple-bright: #c084fc;
-  --purple-glow: rgba(168,85,247,0.15);
-  --gold: #d4af6a;
-  --gold-bright: #f2d29b;
-  --gold-dim: #7a6339;
+  --purple: #22c55e;
+  --purple-dim: #16a34a;
+  --purple-bright: #4ade80;
+  --purple-glow: rgba(34,197,94,0.15);
+  --gold: #86efac;
+  --gold-bright: #bbf7d0;
+  --gold-dim: #14532d;
   --text: #f0eefa;
   --text-dim: #8b8ba7;
   --text-faint: #4a4a60;
@@ -46,14 +46,14 @@ body {
   cursor: none;
 }
 
-::selection { background: rgba(168,85,247,0.35); color: #fff; }
+::selection { background: rgba(34,197,94,0.35); color: #fff; }
 a { color: inherit; text-decoration: none; }
 
 /* ── CUSTOM CURSOR ── */
 #cursor-outer {
   position: fixed;
   width: 36px; height: 36px;
-  border: 1.5px solid rgba(168,85,247,0.6);
+  border: 1.5px solid rgba(34,197,94,0.6);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
@@ -70,16 +70,16 @@ a { color: inherit; text-decoration: none; }
   z-index: 9999;
   transform: translate(-50%, -50%);
   transition: width .15s, height .15s, background .15s;
-  box-shadow: 0 0 10px var(--purple), 0 0 20px rgba(168,85,247,0.4);
+  box-shadow: 0 0 10px var(--purple), 0 0 20px rgba(34,197,94,0.4);
 }
 .cursor-hover #cursor-outer {
   width: 52px; height: 52px;
-  background: rgba(168,85,247,0.07);
+  background: rgba(34,197,94,0.07);
   border-color: var(--purple);
 }
 .cursor-click #cursor-outer {
   width: 28px; height: 28px;
-  background: rgba(168,85,247,0.2);
+  background: rgba(34,197,94,0.2);
 }
 
 /* ── LOADING SCREEN ── */
@@ -144,14 +144,14 @@ header {
   background: linear-gradient(145deg, var(--purple), var(--purple-dim));
   display: flex; align-items: center; justify-content: center;
   font-family: 'Sora'; font-weight: 800; color: #fff; font-size: 16px;
-  box-shadow: 0 4px 20px rgba(168,85,247,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+  box-shadow: 0 4px 20px rgba(34,197,94,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
   transition: box-shadow .2s;
   overflow: hidden;
 }
 .brand-mark img {
   width: 100%; height: 100%; object-fit: cover; display: block;
 }
-.brand:hover .brand-mark { box-shadow: 0 4px 30px rgba(168,85,247,0.7), inset 0 1px 0 rgba(255,255,255,0.2); }
+.brand:hover .brand-mark { box-shadow: 0 4px 30px rgba(34,197,94,0.7), inset 0 1px 0 rgba(255,255,255,0.2); }
 .brand-name { font-family: 'Sora'; font-weight: 700; font-size: 16px; letter-spacing: -.3px; }
 .brand-name em { font-style: normal; color: var(--purple-bright); }
 .brand-sub { font-size: 9px; letter-spacing: 2.5px; color: var(--text-faint); text-transform: uppercase; font-family: 'JetBrains Mono'; margin-top: 1px; }
@@ -196,7 +196,7 @@ header {
 .search-wrap input::placeholder { color: var(--text-faint); }
 .search-wrap input:focus {
   border-color: var(--purple-dim);
-  box-shadow: 0 0 0 3px rgba(168,85,247,.12);
+  box-shadow: 0 0 0 3px rgba(34,197,94,.12);
   background: var(--surface2);
 }
 .search-wrap .si {
@@ -224,9 +224,9 @@ header {
   font-family: 'JetBrains Mono'; font-size: 10.5px;
   letter-spacing: 1.8px; text-transform: uppercase;
   color: var(--purple-bright); font-weight: 600;
-  border: 1px solid rgba(168,85,247,.25);
+  border: 1px solid rgba(34,197,94,.25);
   padding: 5px 12px; border-radius: 100px;
-  background: rgba(168,85,247,.06);
+  background: rgba(34,197,94,.06);
   margin-bottom: 22px;
 }
 .pulse-dot {
@@ -273,7 +273,7 @@ h1 .g {
   border: 1px solid var(--line2);
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 40px 80px -20px rgba(0,0,0,.8), 0 0 0 1px rgba(168,85,247,.08), inset 0 1px 0 rgba(255,255,255,.04);
+  box-shadow: 0 40px 80px -20px rgba(0,0,0,.8), 0 0 0 1px rgba(34,197,94,.08), inset 0 1px 0 rgba(255,255,255,.04);
   position: relative;
 }
 .terminal::before {
@@ -317,7 +317,7 @@ h1 .g {
 .section-head h2 .dot-accent {
   width: 8px; height: 8px; border-radius: 50%;
   background: var(--purple);
-  box-shadow: 0 0 10px rgba(168,85,247,.8);
+  box-shadow: 0 0 10px rgba(34,197,94,.8);
 }
 .result-label { font-size: 12px; color: var(--text-faint); font-family: 'JetBrains Mono'; }
 
@@ -342,11 +342,11 @@ h1 .g {
 .card::before {
   content: '';
   position: absolute; inset: 0; border-radius: 10px;
-  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(168,85,247,.06), transparent 60%);
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(34,197,94,.06), transparent 60%);
   opacity: 0; transition: opacity .3s;
   pointer-events: none; z-index: 0;
 }
-.card:hover { transform: translateY(-5px); border-color: rgba(168,85,247,.35); box-shadow: 0 20px 50px -20px rgba(168,85,247,.2), 0 0 0 1px rgba(168,85,247,.1); }
+.card:hover { transform: translateY(-5px); border-color: rgba(34,197,94,.35); box-shadow: 0 20px 50px -20px rgba(34,197,94,.2), 0 0 0 1px rgba(34,197,94,.1); }
 .card:hover::before { opacity: 1; }
 
 /* Shine sweep on hover */
@@ -378,7 +378,7 @@ h1 .g {
   position: absolute; top: 12px; left: 12px; z-index: 2;
   display: flex; align-items: center; gap: 5px;
   background: rgba(10,10,20,.8);
-  border: 1px solid rgba(168,85,247,.4);
+  border: 1px solid rgba(34,197,94,.4);
   color: var(--purple-bright);
   font-family: 'JetBrains Mono'; font-size: 9.5px; font-weight: 600;
   letter-spacing: 1px; text-transform: uppercase;
@@ -406,7 +406,7 @@ h1 .g {
   transition: border-color .2s, color .2s, background .2s, transform .2s, box-shadow .2s;
 }
 .pill svg { width: 10px; height: 10px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
-.pill:hover { border-color: rgba(168,85,247,.4); color: var(--purple-bright); background: rgba(168,85,247,.07); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(168,85,247,.1); }
+.pill:hover { border-color: rgba(34,197,94,.4); color: var(--purple-bright); background: rgba(34,197,94,.07); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(34,197,94,.1); }
 .pill.showcase { border-color: rgba(255,77,77,.3); color: #ff8080; background: rgba(255,77,77,.06); }
 .pill.showcase:hover { border-color: rgba(255,77,77,.6); background: rgba(255,77,77,.12); box-shadow: 0 4px 12px rgba(255,77,77,.12); }
 
@@ -430,7 +430,7 @@ h1 .g {
   color: var(--text-dim);
   transition: all .18s;
 }
-.copy-icon-btn:hover { color: var(--purple-bright); border-color: rgba(168,85,247,.4); background: rgba(168,85,247,.08); }
+.copy-icon-btn:hover { color: var(--purple-bright); border-color: rgba(34,197,94,.4); background: rgba(34,197,94,.08); }
 .copy-icon-btn.done { color: var(--ok); border-color: rgba(52,211,153,.4); }
 .copy-icon-btn svg { width: 13px; height: 13px; }
 
@@ -444,7 +444,7 @@ h1 .g {
   background: linear-gradient(135deg, var(--purple), var(--purple-dim));
   color: #fff;
   transition: transform .15s, box-shadow .15s, filter .15s;
-  box-shadow: 0 4px 20px rgba(168,85,247,.25);
+  box-shadow: 0 4px 20px rgba(34,197,94,.25);
 }
 .copy-main-btn::before {
   content: '';
@@ -453,7 +453,7 @@ h1 .g {
   transform: translateX(-100%); transition: transform .5s ease;
 }
 .copy-main-btn:hover::before { transform: translateX(200%); }
-.copy-main-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(168,85,247,.4); filter: brightness(1.08); }
+.copy-main-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(34,197,94,.4); filter: brightness(1.08); }
 .copy-main-btn:active { transform: translateY(0); }
 .copy-main-btn svg { width: 14px; height: 14px; position: relative; z-index: 1; }
 .copy-main-btn span { position: relative; z-index: 1; }
@@ -465,7 +465,7 @@ h1 .g {
   display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 22px;
   border: 1px solid var(--line2); border-radius: 12px;
   padding: 28px 32px;
-  background: linear-gradient(120deg, rgba(168,85,247,.06), rgba(212,175,106,.03), transparent), var(--surface);
+  background: linear-gradient(120deg, rgba(34,197,94,.06), rgba(212,175,106,.03), transparent), var(--surface);
   position: relative; overflow: hidden;
 }
 .cta-inner::before {
@@ -500,6 +500,20 @@ footer {
 }
 footer b { color: var(--purple-bright); }
 
+/* ── MUSIC TOGGLE ── */
+#muteBtn {
+  position: fixed; bottom: 22px; right: 22px; z-index: 200;
+  width: 48px; height: 48px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--surface); border: 1px solid var(--line2);
+  color: var(--purple-bright); cursor: none;
+  box-shadow: 0 8px 24px rgba(0,0,0,.5), 0 0 0 1px rgba(34,197,94,.15);
+  transition: all .2s;
+}
+#muteBtn:hover { border-color: var(--purple); box-shadow: 0 8px 30px rgba(34,197,94,.35); transform: translateY(-2px); }
+#muteBtn svg { width: 20px; height: 20px; }
+@media (max-width: 640px) { #muteBtn { bottom: 16px; right: 16px; width: 42px; height: 42px; } body { cursor: auto; } }
+
 /* ── AMBIENT GLOW ORBS ── */
 .orb {
   position: fixed; border-radius: 50%;
@@ -532,6 +546,13 @@ footer b { color: var(--purple-bright); }
 </style>
 </head>
 <body>
+
+<!-- Background Music -->
+<audio id="bgMusic" src="/bg-music.mp3" loop preload="auto"></audio>
+<button id="muteBtn" title="Sesi aç/kapat" aria-label="Toggle music">
+  <svg id="muteIconOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+  <svg id="muteIconOff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+</button>
 
 <!-- Ambient orbs -->
 <div class="orb orb1"></div>
@@ -842,7 +863,7 @@ function drawParticles() {
     if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(168,85,247,${p.a})`;
+    ctx.fillStyle = `rgba(34,197,94,${p.a})`;
     ctx.fill();
   });
   // connections
@@ -855,7 +876,7 @@ function drawParticles() {
         ctx.beginPath();
         ctx.moveTo(particles[i].x, particles[i].y);
         ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.strokeStyle = `rgba(168,85,247,${0.12 * (1 - d / 140)})`;
+        ctx.strokeStyle = `rgba(34,197,94,${0.12 * (1 - d / 140)})`;
         ctx.lineWidth = .5;
         ctx.stroke();
       }
@@ -868,6 +889,40 @@ drawParticles();
 // ── LOADER ──
 window.addEventListener('load', () => {
   setTimeout(() => document.getElementById('loader').classList.add('done'), 1300);
+});
+
+// ── BACKGROUND MUSIC ──
+const bgMusic = document.getElementById('bgMusic');
+const muteBtn = document.getElementById('muteBtn');
+const iconOn = document.getElementById('muteIconOn');
+const iconOff = document.getElementById('muteIconOff');
+bgMusic.volume = 0.4;
+
+function setPlayingUI(isPlaying) {
+  iconOn.style.display = isPlaying ? 'block' : 'none';
+  iconOff.style.display = isPlaying ? 'none' : 'block';
+}
+
+function tryPlay() {
+  bgMusic.play().then(() => setPlayingUI(true)).catch(() => setPlayingUI(false));
+}
+
+// Try autoplay immediately; if blocked by browser, start on first user interaction
+tryPlay();
+['click', 'touchstart', 'keydown', 'scroll'].forEach(evt => {
+  document.addEventListener(evt, function startOnInteract() {
+    if (bgMusic.paused) tryPlay();
+  }, { once: true });
+});
+
+muteBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  if (bgMusic.paused) {
+    tryPlay();
+  } else {
+    bgMusic.pause();
+    setPlayingUI(false);
+  }
 });
 </script>
 </body>
