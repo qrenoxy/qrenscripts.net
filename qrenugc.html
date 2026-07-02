@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QREN // Script Vault</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #07070a;
+    --bg-soft: #0d0d12;
+    --surface: #131319;
+    --surface-2: #191921;
+    --line: #232330;
+    --line-bright: #33333f;
+    --gold: #d4af6a;
+    --gold-bright: #f2d29b;
+    --gold-dim: #7a6339;
+    --text: #eceae4;
+    --text-dim: #96939e;
+    --text-faint: #55535e;
+    --ok: #7fd9a8;
+    --radius: 3px;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:
+      linear-gradient(rgba(212,175,106,0.028) 1px, transparent 1px) 0 0 / 100% 34px,
+      radial-gradient(ellipse 1000px 500px at 12% -8%, rgba(212,175,106,0.08), transparent 55%),
+      radial-gradient(ellipse 800px 600px at 105% 5%, rgba(90,70,180,0.06), transparent 55%),
+      var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+  }
+
+  ::selection{ background: rgba(212,175,106,0.35); color:#fff; }
+  a{ color: inherit; text-decoration:none; }
+
+  header{
+    position: sticky; top:0; z-index: 50;
+    display:flex; align-items:center; justify-content:space-between;
+    gap: 20px;
+    padding: 14px 40px;
+    background: rgba(7,7,10,0.8);
+    backdrop-filter: blur(14px) saturate(140%);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .brand{ display:flex; align-items:center; gap:11px; }
+
+  .brand-mark{
+    width:34px; height:34px; border-radius: 7px;
+    background: linear-gradient(155deg, var(--gold-bright), var(--gold-dim));
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono'; font-weight:700; color:#0a0a0f; font-size:15px;
+    box-shadow: 0 4px 16px rgba(212,175,106,0.3), inset 0 1px 0 rgba(255,255,255,0.4);
+  }
+
+  .brand-text{ font-family:'Sora'; font-weight:700; font-size:17px; letter-spacing:-0.2px; line-height:1.15; }
+  .brand-text span{ color: var(--gold); }
+  .brand-sub{ font-size:9.5px; letter-spacing:2.2px; color:var(--text-faint); text-transform:uppercase; font-family:'JetBrains Mono'; }
+
+  .header-right{ display:flex; align-items:center; gap:14px; flex:1; justify-content:flex-end; }
+  .social-row{ display:flex; align-items:center; gap:8px; }
+
+  .social-btn{
+    width: 36px; height:36px;
+    display:flex; align-items:center; justify-content:center;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text-dim);
+    transition: border-color .18s ease, color .18s ease, background .18s ease, transform .18s ease;
+  }
+  .social-btn svg{ width:17px; height:17px; }
+  .social-btn.yt:hover{ color:#ff4d4d; border-color:#ff4d4d55; background:rgba(255,77,77,0.08); transform: translateY(-1px); }
+  .social-btn.dc:hover{ color:#8ea1ff; border-color:#8ea1ff55; background:rgba(88,101,242,0.1); transform: translateY(-1px); }
+
+  .divider{ width:1px; height:22px; background: var(--line); }
+
+  .search-wrap{ position:relative; width: 260px; }
+  .search-wrap input{
+    width:100%;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 9px 14px 9px 36px;
+    color: var(--text);
+    font-family:'JetBrains Mono'; font-size:13px;
+    outline:none;
+    transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+  }
+  .search-wrap input::placeholder{ color: var(--text-faint); }
+  .search-wrap input:focus{
+    border-color: var(--gold-dim);
+    box-shadow: 0 0 0 3px rgba(212,175,106,0.1);
+    background: var(--surface-2);
+  }
+  .search-wrap svg{
+    position:absolute; left:12px; top:50%; transform:translateY(-50%);
+    width:14px; height:14px; stroke: var(--text-faint);
+  }
+
+  .hero{ max-width: 1180px; margin: 0 auto; padding: 56px 40px 40px; }
+  .hero-inner{ display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items:center; }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono';
+    font-size:11px; letter-spacing: 1.5px; text-transform:uppercase;
+    color: var(--gold); font-weight:600;
+    border: 1px solid rgba(212,175,106,0.28);
+    padding: 5px 12px; border-radius: var(--radius);
+    background: rgba(212,175,106,0.05);
+    margin-bottom: 20px;
+  }
+  .eyebrow::before{
+    content:''; width:6px; height:6px; border-radius:50%;
+    background: var(--ok);
+    box-shadow: 0 0 8px rgba(127,217,168,0.8);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  h1{
+    font-family:'Sora'; font-weight:800;
+    font-size: clamp(32px, 4.4vw, 50px);
+    line-height: 1.05;
+    letter-spacing: -1.3px;
+  }
+  h1 .accent{
+    background: linear-gradient(120deg, var(--gold-bright), var(--gold), #b98f4a);
+    -webkit-background-clip: text; background-clip:text; color:transparent;
+  }
+
+  .hero p{ max-width: 480px; margin: 18px 0 0; color: var(--text-dim); font-size: 15px; line-height:1.6; }
+
+  .hero-stats{ display:flex; gap:34px; margin-top: 32px; }
+  .stat b{ display:block; font-family:'Sora'; font-size:23px; color: var(--gold-bright); font-weight:700; }
+  .stat span{ font-size:10.5px; color:var(--text-faint); text-transform:uppercase; letter-spacing:1.4px; font-family:'JetBrains Mono'; }
+
+  .terminal{
+    background: linear-gradient(180deg, var(--surface), var(--bg-soft));
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow:hidden;
+    box-shadow: 0 30px 60px -30px rgba(0,0,0,0.7);
+  }
+  .terminal-bar{ display:flex; align-items:center; gap:7px; padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--bg-soft); }
+  .terminal-bar .dot{ width:10px; height:10px; border-radius:50%; }
+  .terminal-bar .dot:nth-child(1){ background:#ff5f57; }
+  .terminal-bar .dot:nth-child(2){ background:#febc2e; }
+  .terminal-bar .dot:nth-child(3){ background:#28c840; }
+  .terminal-bar span{ margin-left:8px; font-family:'JetBrains Mono'; font-size:11px; color:var(--text-faint); }
+  .terminal-body{ padding: 18px 16px; font-family:'JetBrains Mono'; font-size: 12.5px; line-height:1.85; color: var(--text-dim); min-height: 150px; }
+  .terminal-body .t-prompt{ color: var(--gold); }
+  .terminal-body .t-ok{ color: var(--ok); }
+  .terminal-body .cursor{ display:inline-block; width:7px; height:14px; background:var(--gold-bright); animation: blink 1s step-end infinite; vertical-align:middle; margin-left:2px; }
+  @keyframes blink{ 50%{opacity:0;} }
+
+  .section{ max-width: 1180px; margin: 0 auto; padding: 10px 40px 90px; }
+
+  .section-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom: 22px; border-bottom: 1px solid var(--line); padding-bottom: 14px; }
+  .section-head h2{ font-family:'Sora'; font-size: 19px; font-weight:700; }
+  .section-head span{ color: var(--text-faint); font-size:12.5px; font-family:'JetBrains Mono'; }
+
+  #empty-state{ display:none; text-align:center; padding: 60px 20px; color: var(--text-faint); }
+  #empty-state .glyph{ font-family:'JetBrains Mono'; font-size:28px; margin-bottom:12px; opacity:.5; }
+  #empty-state p{ font-size:13.5px; font-family:'JetBrains Mono'; }
+
+  .grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+
+  .card{
+    position:relative;
+    background: linear-gradient(180deg, var(--surface), var(--bg-soft));
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow:hidden;
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .card:hover{ transform: translateY(-3px); border-color: var(--gold-dim); box-shadow: 0 18px 36px -20px rgba(0,0,0,0.7); }
+
+  .card-media{ position:relative; height:150px; overflow:hidden; background:#000; }
+  .card-media img{ width:100%; height:100%; object-fit:cover; transition: transform .5s ease; }
+  .card:hover .card-media img{ transform: scale(1.06); }
+  .card-media::after{ content:''; position:absolute; inset:0; background: linear-gradient(180deg, transparent 40%, rgba(7,7,10,0.92) 100%); }
+
+  .badge{
+    position:absolute; top:10px; left:10px; z-index:2;
+    background: rgba(7,7,10,0.75);
+    border: 1px solid rgba(212,175,106,0.4);
+    color: var(--gold-bright);
+    font-family:'JetBrains Mono';
+    font-size: 10px; font-weight:600; letter-spacing:1px; text-transform:uppercase;
+    padding: 4px 9px; border-radius:3px;
+    backdrop-filter: blur(6px);
+    display:flex; align-items:center; gap:5px;
+  }
+  .badge::before{ content:'✓'; font-size:10px; }
+
+  .card-body{ padding: 14px 16px 16px; }
+  .card-title{ font-family:'Sora'; font-weight:700; font-size:15.5px; margin-bottom: 10px; line-height:1.3; }
+
+  .link-row{ display:flex; gap:6px; margin-bottom:11px; flex-wrap:wrap; }
+  .pill-link{
+    display:flex; align-items:center; gap:5px;
+    font-size:11.5px; font-weight:500; font-family:'JetBrains Mono';
+    padding: 6px 10px;
+    border-radius: 4px;
+    border:1px solid var(--line);
+    background: var(--surface-2);
+    color: var(--text-dim);
+    transition: border-color .2s ease, color .2s ease, background .2s ease;
+  }
+  .pill-link:hover{ border-color: var(--gold-dim); color: var(--gold-bright); background: rgba(212,175,106,0.06); }
+  .pill-link svg{ width:11px; height:11px; stroke:currentColor; flex-shrink:0; }
+
+  .code-box{
+    position:relative;
+    background: #08080b;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 10px 40px 10px 12px;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11.3px;
+    color: #a9d8b8;
+    line-height:1.5;
+    white-space: pre-wrap;
+    word-break: break-all;
+    max-height: 80px;
+    overflow-y:auto;
+  }
+
+  .copy-btn{
+    position:absolute; top:7px; right:7px;
+    width: 27px; height:27px;
+    display:flex; align-items:center; justify-content:center;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    cursor:pointer;
+    color: var(--text-dim);
+    transition: all .18s ease;
+  }
+  .copy-btn:hover{ color: var(--gold-bright); border-color: var(--gold-dim); background: rgba(212,175,106,0.08); }
+  .copy-btn svg{ width:13px; height:13px; }
+  .copy-btn.copied{ color: var(--ok); border-color: rgba(127,217,168,0.4); }
+
+  .copy-script-btn{
+    width:100%; margin-top: 10px;
+    display:flex; align-items:center; justify-content:center; gap:7px;
+    padding: 10px;
+    border-radius: 5px; border: none;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold-dim));
+    color: #0a0a0f;
+    font-family:'Sora'; font-weight:700; font-size:12.5px;
+    cursor:pointer;
+    transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+  }
+  .copy-script-btn:hover{ transform: translateY(-1px); box-shadow: 0 8px 20px -8px rgba(212,175,106,0.5); filter: brightness(1.06); }
+  .copy-script-btn:active{ transform: translateY(0); }
+  .copy-script-btn svg{ width:14px; height:14px; }
+  .copy-script-btn.copied{ background: linear-gradient(135deg, #9de3ba, #6cbf90); }
+
+  .cta-band{ max-width: 1180px; margin: 0 auto 90px; padding: 0 40px; }
+  .cta-inner{
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 24px 28px;
+    background: linear-gradient(120deg, rgba(212,175,106,0.05), transparent 60%), var(--surface);
+  }
+  .cta-inner h3{ font-family:'Sora'; font-size:17px; font-weight:700; margin-bottom:4px; }
+  .cta-inner p{ color: var(--text-dim); font-size:13px; }
+  .cta-links{ display:flex; gap:10px; }
+  .cta-link{
+    display:flex; align-items:center; gap:8px;
+    padding: 10px 16px;
+    border-radius: 5px;
+    font-family:'Sora'; font-weight:600; font-size:13px;
+    border: 1px solid var(--line);
+    transition: all .18s ease;
+  }
+  .cta-link svg{ width:16px; height:16px; }
+  .cta-link.yt{ color:#fff; background:#2a1414; border-color:#ff4d4d33; }
+  .cta-link.yt:hover{ background:#ff4d4d; color:#fff; transform: translateY(-1px); }
+  .cta-link.dc{ color:#fff; background:#171a2e; border-color:#5865f233; }
+  .cta-link.dc:hover{ background:#5865f2; color:#fff; transform: translateY(-1px); }
+
+  footer{ border-top: 1px solid var(--line); padding: 24px 40px; text-align:center; color: var(--text-faint); font-size: 12px; font-family:'JetBrains Mono'; }
+  footer b{ color: var(--gold); }
+
+  @media (max-width: 900px){ .hero-inner{ grid-template-columns: 1fr; } }
+  @media (max-width: 640px){
+    header{ padding:12px 18px; flex-wrap:wrap; gap:10px; }
+    .header-right{ width:100%; justify-content:space-between; }
+    .search-wrap{ width: 100%; }
+    .hero{ padding: 40px 18px 30px; }
+    .section{ padding: 10px 18px 60px; }
+    .cta-band{ padding:0 18px; }
+    .cta-inner{ flex-direction:column; align-items:flex-start; }
+  }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="brand-mark">Q</div>
+    <div>
+      <div class="brand-text">qren<span>scripts</span></div>
+      <div class="brand-sub">SCRIPT VAULT</div>
+    </div>
+  </div>
+
+  <div class="header-right">
+    <div class="social-row">
+      <a class="social-btn yt" href="https://www.youtube.com/@qrenwashere" target="_blank" rel="noopener" title="YouTube">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.4 3.5 12 3.5 12 3.5s-7.4 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c2 .6 9.4.6 9.4.6s7.4 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>
+      </a>
+      <a class="social-btn dc" href="https://discord.gg/KsUtSvWhNU" target="_blank" rel="noopener" title="Discord">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 4.4A19.7 19.7 0 0 0 15.4 3a13.6 13.6 0 0 0-.7 1.4 18.3 18.3 0 0 0-5.4 0A13.6 13.6 0 0 0 8.6 3a19.6 19.6 0 0 0-4.9 1.5C1 8.9.3 13.3.6 17.6a19.8 19.8 0 0 0 6 3 14.6 14.6 0 0 0 1.3-2.1 12.8 12.8 0 0 1-2-1c.2-.1.3-.3.5-.4a14.1 14.1 0 0 0 12 0l.5.4a12.8 12.8 0 0 1-2 1 14.6 14.6 0 0 0 1.3 2.1 19.7 19.7 0 0 0 6-3c.4-5-.9-9.4-3.9-13.2ZM8.7 14.9c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm6.6 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Z"/></svg>
+      </a>
+    </div>
+    <div class="divider"></div>
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="searchInput" type="text" placeholder="Search a game..." autocomplete="off">
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow">Live · Verified Scripts</div>
+      <h1>The <span class="accent">script vault</span><br>built by Qren.</h1>
+      <p>Every script here is written, tested and maintained by Qren. Grab the loadstring, drop it in your executor, run it.</p>
+
+      <div class="hero-stats">
+        <div class="stat"><b id="statCount">1</b><span>Scripts</span></div>
+        <div class="stat"><b>100%</b><span>Free</span></div>
+        <div class="stat"><b>24/7</b><span>Uptime</span></div>
+      </div>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        <span>qren@vault: ~</span>
+      </div>
+      <div class="terminal-body">
+<span class="t-prompt">&gt;</span> fetching script...<br>
+<span class="t-prompt">&gt;</span> target: wimbledon-showdown-tennis<br>
+<span class="t-prompt">&gt;</span> status: <span class="t-ok">verified ✓</span><br>
+<span class="t-prompt">&gt;</span> loadstring(game:HttpGet(...))()<br>
+<span class="t-prompt">&gt;</span> ready to execute<span class="cursor"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-head">
+    <h2>Script Library</h2>
+    <span id="resultCount">1 script listed</span>
+  </div>
+
+  <div id="empty-state">
+    <div class="glyph">[ ]</div>
+    <p>No script found for that game yet.</p>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</div>
+
+<div class="cta-band">
+  <div class="cta-inner">
+    <div>
+      <h3>Join the community</h3>
+      <p>New scripts, updates and requests drop first on Discord & YouTube.</p>
+    </div>
+    <div class="cta-links">
+      <a class="cta-link yt" href="https://www.youtube.com/@qrenwashere" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.4 3.5 12 3.5 12 3.5s-7.4 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c2 .6 9.4.6 9.4.6s7.4 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>
+        YouTube
+      </a>
+      <a class="cta-link dc" href="https://discord.gg/KsUtSvWhNU" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 4.4A19.7 19.7 0 0 0 15.4 3a13.6 13.6 0 0 0-.7 1.4 18.3 18.3 0 0 0-5.4 0A13.6 13.6 0 0 0 8.6 3a19.6 19.6 0 0 0-4.9 1.5C1 8.9.3 13.3.6 17.6a19.8 19.8 0 0 0 6 3 14.6 14.6 0 0 0 1.3-2.1 12.8 12.8 0 0 1-2-1c.2-.1.3-.3.5-.4a14.1 14.1 0 0 0 12 0l.5.4a12.8 12.8 0 0 1-2 1 14.6 14.6 0 0 0 1.3 2.1 19.7 19.7 0 0 0 6-3c.4-5-.9-9.4-3.9-13.2ZM8.7 14.9c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm6.6 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Z"/></svg>
+        Discord
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  This site is maintained by <b>qren</b>. Use scripts at your own risk.
+</footer>
+
+<script>
+  const scripts = [
+    {
+      game: "Wimbledon Showdown Tennis",
+      gameLink: "https://www.roblox.com/tr/games/9463737803/Wimbledon-Tennis-Showdown",
+      ugcLink: "https://www.roblox.com/tr/catalog/76560300381067/Emirates-Camera",
+      image: "https://i.imgur.com/zkMlbl1.jpeg",
+      code: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/qrenoxy/wimbledonshowdownugcscript/refs/heads/main/qren"))()'
+    }
+  ];
+
+  const grid = document.getElementById('grid');
+  const emptyState = document.getElementById('empty-state');
+  const resultCount = document.getElementById('resultCount');
+  const statCount = document.getElementById('statCount');
+  const searchInput = document.getElementById('searchInput');
+
+  statCount.textContent = scripts.length;
+
+  function escapeHtml(str){
+    return str.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  }
+
+  function render(list){
+    grid.innerHTML = '';
+    if(list.length === 0){
+      emptyState.style.display = 'block';
+      resultCount.textContent = '0 scripts listed';
+      return;
+    }
+    emptyState.style.display = 'none';
+    resultCount.textContent = list.length + (list.length === 1 ? ' script listed' : ' scripts listed');
+
+    list.forEach((item, idx) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="card-media">
+          <span class="badge">Verified</span>
+          <img src="${item.image}" alt="${escapeHtml(item.game)}">
+        </div>
+        <div class="card-body">
+          <div class="card-title">${escapeHtml(item.game)}</div>
+          <div class="link-row">
+            <a class="pill-link" href="${item.gameLink}" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Game
+            </a>
+            <a class="pill-link" href="${item.ugcLink}" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              UGC Item
+            </a>
+          </div>
+          <div class="code-box" id="code-${idx}">
+            <button class="copy-btn" data-idx="${idx}" title="Copy">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </button>
+            ${escapeHtml(item.code)}
+          </div>
+          <button class="copy-script-btn" data-idx="${idx}">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy Script
+          </button>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    document.querySelectorAll('.copy-btn, .copy-script-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = btn.getAttribute('data-idx');
+        const code = list[idx].code;
+        navigator.clipboard.writeText(code).then(() => {
+          const originalHTML = btn.innerHTML;
+          btn.classList.add('copied');
+          if(btn.classList.contains('copy-script-btn')){
+            btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+          } else {
+            btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+          }
+          setTimeout(() => {
+            btn.classList.remove('copied');
+            btn.innerHTML = originalHTML;
+          }, 1600);
+        });
+      });
+    });
+  }
+
+  render(scripts);
+
+  searchInput.addEventListener('input', (e) => {
+    const q = e.target.value.trim().toLowerCase();
+    const filtered = scripts.filter(s => s.game.toLowerCase().includes(q));
+    render(filtered);
+  });
+</script>
+
+</body>
+</html>
