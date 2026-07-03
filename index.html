@@ -46,7 +46,6 @@ body {
 ::selection { background: rgba(168,85,247,0.35); color: #fff; }
 a { color: inherit; text-decoration: none; }
 
-/* ── CUSTOM CURSOR ── */
 #cursor-outer {
   position: fixed;
   width: 36px; height: 36px;
@@ -79,7 +78,6 @@ a { color: inherit; text-decoration: none; }
   background: rgba(168,85,247,0.2);
 }
 
-/* ── LOADING SCREEN ── */
 #loader {
   position: fixed; inset: 0;
   background: var(--bg);
@@ -108,13 +106,11 @@ a { color: inherit; text-decoration: none; }
 }
 @keyframes loadFill { to { width: 100%; } }
 
-/* ── SCROLLBAR ── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--purple-dim); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--purple); }
 
-/* ── PARTICLES CANVAS ── */
 #particles-canvas {
   position: fixed;
   inset: 0;
@@ -123,7 +119,6 @@ a { color: inherit; text-decoration: none; }
   opacity: .45;
 }
 
-/* ── HEADER ── */
 header {
   position: sticky; top: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
@@ -198,7 +193,6 @@ header {
   stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
 }
 
-/* ── HERO ── */
 .hero {
   position: relative;
   max-width: 1200px; margin: 0 auto;
@@ -258,7 +252,6 @@ h1 .g {
 }
 .stat span { font-size: 10px; color: var(--text-faint); letter-spacing: 1.8px; text-transform: uppercase; font-family: 'JetBrains Mono'; }
 
-/* Terminal card */
 .hero-right { animation: fadeUp .8s cubic-bezier(.4,0,.2,1) .5s both; }
 
 .terminal {
@@ -295,7 +288,6 @@ h1 .g {
 .tcursor { display: inline-block; width: 8px; height: 14px; background: var(--purple-bright); animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 2px; border-radius: 1px; }
 @keyframes blink { 50% { opacity: 0; } }
 
-/* ── SECTION ── */
 .section { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 44px 100px; }
 
 .section-head {
@@ -314,15 +306,12 @@ h1 .g {
 }
 .result-label { font-size: 12px; color: var(--text-faint); font-family: 'JetBrains Mono'; }
 
-/* Empty state */
 #empty-state { display: none; text-align: center; padding: 80px 20px; color: var(--text-faint); }
 #empty-state .e-glyph { font-family: 'JetBrains Mono'; font-size: 32px; margin-bottom: 14px; opacity: .4; }
 #empty-state p { font-family: 'JetBrains Mono'; font-size: 13px; }
 
-/* ── GRID ── */
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 18px; }
 
-/* ── CARD ── */
 .card {
   position: relative;
   background: var(--surface);
@@ -451,7 +440,6 @@ h1 .g {
 .copy-main-btn span { position: relative; z-index: 1; }
 .copy-main-btn.done { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 20px rgba(16,185,129,.25); }
 
-/* ── CTA BAND ── */
 .cta-band { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto 100px; padding: 0 44px; }
 .cta-inner {
   display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 22px;
@@ -482,7 +470,6 @@ h1 .g {
 .cta-link.dc { background: rgba(88,101,242,.07); border-color: rgba(88,101,242,.2); color: #a5b4fc; }
 .cta-link.dc:hover { background: #5865f2; color: #fff; border-color: #5865f2; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(88,101,242,.2); }
 
-/* ── FOOTER ── */
 footer {
   position: relative; z-index: 1;
   border-top: 1px solid var(--line);
@@ -492,7 +479,6 @@ footer {
 }
 footer b { color: var(--purple-bright); }
 
-/* ── AMBIENT GLOW ORBS ── */
 .orb {
   position: fixed; border-radius: 50%;
   pointer-events: none; z-index: 0;
@@ -505,11 +491,9 @@ footer b { color: var(--purple-bright); }
 @keyframes drift2 { to { transform: translate(-80px, -60px); } }
 @keyframes drift3 { to { transform: translate(-40%, -60%); } }
 
-/* ── REVEAL ANIMATIONS ── */
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
 .reveal.visible { opacity: 1; transform: none; }
 
-/* ── RESPONSIVE ── */
 @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } .hero-right { display: none; } }
 @media (max-width: 640px) {
   header { padding: 12px 18px; flex-wrap: wrap; }
@@ -525,25 +509,20 @@ footer b { color: var(--purple-bright); }
 </head>
 <body>
 
-<!-- Ambient orbs -->
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
 <div class="orb orb3"></div>
 
-<!-- Custom cursor -->
 <div id="cursor-outer"></div>
 <div id="cursor-dot"></div>
 
-<!-- Loader -->
 <div id="loader">
   <div class="loader-logo">qren<span style="color:var(--text-dim);font-weight:400">scripts</span></div>
   <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
 </div>
 
-<!-- Particles -->
 <canvas id="particles-canvas"></canvas>
 
-<!-- HEADER -->
 <header>
   <div class="brand">
     <div class="brand-mark">Q</div>
@@ -570,14 +549,13 @@ footer b { color: var(--purple-bright); }
   </div>
 </header>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-left">
     <div class="eyebrow"><div class="pulse-dot"></div>Live · Verified Scripts</div>
     <h1>The <span class="g">script vault</span><br>built by Qren.</h1>
     <p class="hero-desc">Every script here is written, tested and maintained by Qren. Grab the loadstring, paste it in your executor and run.</p>
     <div class="hero-stats">
-      <div class="stat"><b id="statCount">3</b><span>Scripts</span></div>
+      <div class="stat"><b id="statCount">4</b><span>Scripts</span></div>
       <div class="stat"><b>100%</b><span>Free</span></div>
       <div class="stat"><b>24/7</b><span>Uptime</span></div>
     </div>
@@ -599,11 +577,10 @@ footer b { color: var(--purple-bright); }
   </div>
 </section>
 
-<!-- SCRIPT SECTION -->
 <div class="section">
   <div class="section-head reveal">
     <h2><div class="dot-accent"></div>Script Library</h2>
-    <span class="result-label" id="resultCount">3 scripts listed</span>
+    <span class="result-label" id="resultCount">4 scripts listed</span>
   </div>
   <div id="empty-state">
     <div class="e-glyph">[ ]</div>
@@ -612,7 +589,6 @@ footer b { color: var(--purple-bright); }
   <div class="grid" id="grid"></div>
 </div>
 
-<!-- CTA BAND -->
 <div class="cta-band reveal">
   <div class="cta-inner">
     <div>
@@ -655,16 +631,23 @@ const SCRIPTS = [
     code: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/qrenoxy/strongmansimulatorscript/refs/heads/main/qrenugc"))()'
   },
   {
-    game: "Free Items",
+    game: "Free Items (199 Item)",
     gameLink: "https://www.roblox.com/games/109751495795601/unnamed",
     ugcLink: null,
     showcaseLink: "https://youtu.be/kx6EST8oVT8",
     image: "https://i.imgur.com/2TLeP3N.png",
     code: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/qrenoxy/199itemsallinonescript/refs/heads/main/qrenugc"))()'
+  },
+  {
+    game: "SHEIN x Klarna Wonderland",
+    gameLink: "https://www.roblox.com/tr/games/10956766913/SHEIN-x-Klarna-Wonderland",
+    ugcLink: "https://www.roblox.com/catalog/13911022164/Butterfly-Fairy-Wings",
+    showcaseLink: "https://www.youtube.com/watch?v=r1y44Yi2mgc",
+    image: "https://i.imgur.com/ljaPYes.png",
+    code: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/qrenoxy/sheinxklarnawonderlandugcscript/refs/heads/main/qrenugc"))()'
   }
 ];
 
-// ── DATA ──
 const grid = document.getElementById('grid');
 const emptyState = document.getElementById('empty-state');
 const resultCount = document.getElementById('resultCount');
@@ -737,7 +720,6 @@ function render(list) {
     grid.appendChild(card);
   });
 
-  // card mouse glow
   grid.querySelectorAll('.card').forEach(card => {
     card.addEventListener('mousemove', e => {
       const r = card.getBoundingClientRect();
@@ -746,7 +728,6 @@ function render(list) {
     });
   });
 
-  // copy buttons
   grid.querySelectorAll('[data-i]').forEach(btn => {
     btn.addEventListener('click', () => {
       const code = list[+btn.dataset.i].code;
@@ -779,7 +760,6 @@ searchInput.addEventListener('input', e => {
   render(SCRIPTS.filter(s => s.game.toLowerCase().includes(q)));
 });
 
-// ── REVEAL ON SCROLL ──
 function observeReveal() {
   const io = new IntersectionObserver((entries) => {
     entries.forEach(el => {
@@ -790,7 +770,6 @@ function observeReveal() {
 }
 observeReveal();
 
-// ── CUSTOM CURSOR ──
 const outer = document.getElementById('cursor-outer');
 const dot = document.getElementById('cursor-dot');
 let mx = 0, my = 0, ox = 0, oy = 0;
@@ -814,7 +793,6 @@ document.querySelectorAll('a, button, input, [data-i]').forEach(el => {
 document.addEventListener('mousedown', () => document.body.classList.add('cursor-click'));
 document.addEventListener('mouseup', () => document.body.classList.remove('cursor-click'));
 
-// ── PARTICLES ──
 const canvas = document.getElementById('particles-canvas');
 const ctx = canvas.getContext('2d');
 let W, H, particles = [];
@@ -868,7 +846,6 @@ function drawParticles() {
 }
 drawParticles();
 
-// ── LOADER ──
 window.addEventListener('load', () => {
   setTimeout(() => document.getElementById('loader').classList.add('done'), 1300);
 });
