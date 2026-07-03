@@ -342,7 +342,6 @@ h1 .g {
 .card:hover { transform: translateY(-5px); border-color: rgba(168,85,247,.35); box-shadow: 0 20px 50px -20px rgba(168,85,247,.2), 0 0 0 1px rgba(168,85,247,.1); }
 .card:hover::before { opacity: 1; }
 
-/* Shine sweep on hover */
 .card::after {
   content: '';
   position: absolute; top: 0; left: -100%;
@@ -578,7 +577,7 @@ footer b { color: var(--purple-bright); }
     <h1>The <span class="g">script vault</span><br>built by Qren.</h1>
     <p class="hero-desc">Every script here is written, tested and maintained by Qren. Grab the loadstring, paste it in your executor and run.</p>
     <div class="hero-stats">
-      <div class="stat"><b id="statCount">1</b><span>Scripts</span></div>
+      <div class="stat"><b id="statCount">3</b><span>Scripts</span></div>
       <div class="stat"><b>100%</b><span>Free</span></div>
       <div class="stat"><b>24/7</b><span>Uptime</span></div>
     </div>
@@ -604,7 +603,7 @@ footer b { color: var(--purple-bright); }
 <div class="section">
   <div class="section-head reveal">
     <h2><div class="dot-accent"></div>Script Library</h2>
-    <span class="result-label" id="resultCount">1 script listed</span>
+    <span class="result-label" id="resultCount">3 scripts listed</span>
   </div>
   <div id="empty-state">
     <div class="e-glyph">[ ]</div>
@@ -654,6 +653,14 @@ const SCRIPTS = [
     showcaseLink: "https://www.youtube.com/watch?v=1hiVONQi9MI",
     image: "https://i.imgur.com/Kt7e8Hn.png",
     code: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/qrenoxy/strongmansimulatorscript/refs/heads/main/qrenugc"))()'
+  },
+  {
+    game: "Free Items",
+    gameLink: "https://www.roblox.com/games/109751495795601/unnamed",
+    ugcLink: null,
+    showcaseLink: "https://youtu.be/kx6EST8oVT8",
+    image: "https://i.imgur.com/2TLeP3N.png",
+    code: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/qrenoxy/199itemsallinonescript/refs/heads/main/qrenugc"))()'
   }
 ];
 
@@ -687,6 +694,13 @@ function render(list) {
     card.className = 'card reveal';
     card.style.animationDelay = (i * 80) + 'ms';
 
+    const ugcPill = item.ugcLink
+      ? `<a class="pill" href="${esc(item.ugcLink)}" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          UGC
+        </a>`
+      : '';
+
     const showcasePill = item.showcaseLink
       ? `<a class="pill showcase" href="${esc(item.showcaseLink)}" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -709,10 +723,7 @@ function render(list) {
             <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             Game
           </a>
-          <a class="pill" href="${esc(item.ugcLink)}" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-            UGC
-          </a>
+          ${ugcPill}
           ${showcasePill}
         </div>
         <div class="code-wrap" id="code-${i}">
@@ -838,7 +849,6 @@ function drawParticles() {
     ctx.fillStyle = `rgba(168,85,247,${p.a})`;
     ctx.fill();
   });
-  // connections
   for (let i = 0; i < COUNT; i++) {
     for (let j = i + 1; j < COUNT; j++) {
       const dx = particles[i].x - particles[j].x;
